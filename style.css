@@ -1,0 +1,109 @@
+#wordle{
+    text-align: center;
+    text-shadow: 0px 0px 2px rgb(129, 147, 24);
+    font-family: 'Aclonica', Times, serif;
+    font-size:80px;
+    color:rgb(34, 15, 15);
+    margin-bottom: 5px;
+
+
+    
+}
+
+#result{
+    text-align: center;
+    font-size: 50px;
+    width: 400px;
+    color: blue;
+    
+}
+
+body{
+    background-color:white;
+    /* text-align: center */
+}
+
+#gameBorder{
+    display: grid;
+    grid-template-columns: repeat(5, 70px);
+    width: 375px;
+    text-align: center;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.boxes{
+    background-color: lightgray;
+    height: 60px;
+    width: 60px;
+    border: 3px solid;
+    margin-top: 10px;
+    margin-left: 50%;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 45px;
+    
+}
+
+#menu{
+    position:absolute;
+    width: 50px;
+    height: 50px;
+    
+    top: 43px;
+    left: 30px;
+}
+
+
+#menucontents {
+    position: fixed;
+    top: 0;
+    left: -100%; 
+    width: 200px; 
+    height: 100%;
+    background-color: #333;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: left 0.5s ease; 
+  }
+  
+  #menucontents.active {
+    left: 0; 
+  }
+  
+  #contents {
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 0px;
+  }
+  
+  #contents li {
+    margin-bottom: 10px;
+  }
+  
+  #menuimage {
+    cursor: pointer;
+  }
+  
+  #menu {
+    width: 30px;
+    height: 30px;
+  }
+
+
+a{
+    color:rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+
+a:visited{
+    color:rgb(255, 255, 255);
+    text-decoration: none;
+}
