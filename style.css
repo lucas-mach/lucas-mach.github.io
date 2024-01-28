@@ -103,7 +103,7 @@
 }
 
 body{
-    background-color:white;
+    background-color:lightgrey;
     text-align: center
 }
 
@@ -112,14 +112,14 @@ body{
     grid-template-columns: repeat(5, 70px);
     width: 375px;
     text-align: center;
-    background-color: white;
+    background-color: lightgrey;
     margin-left: auto;
     margin-right: auto;
     
 }
 
 .boxes{
-    background-color: lightgray;
+    background-color: white;
     height: 60px;
     width: 60px;
     border: 3px solid;

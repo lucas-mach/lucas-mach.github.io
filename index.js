@@ -26,7 +26,6 @@ function pickWord(){
     return words[index];
 }
 let used = new Set();
-
 let mapYourWord = new Map();
 let mapCorrectWord = new Map();
 mapCorrectWord = addToMap(word,mapCorrectWord);
@@ -129,6 +128,17 @@ function checkKey(event){
         for(let i = 0; i < row.length;i++){
             if(row[i].color == "lightgreen"){
                 document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "lightgreen";
+                let timerId = setInterval(frame, 5);
+                let degrees = 0;
+                function frame(){
+                    if(degrees >= 360){
+                        clearInterval(timerId);
+                    }else{
+                        degrees += 1;
+                        document.getElementById("row"+String(currRow - 1)+"b"+String(i)).style.transform = "rotateY("+degrees+"deg)";
+                    }
+                }
+                
             }
             else if(row[i].color == "yellow"){
                 if(hasGreen(row[i].letter)){
