@@ -86,6 +86,7 @@ function checkKey(event){
         
         addColors();
         mapYourWord.clear();
+        document.getElementById("used").textContent = "";
         for(let letter of used){
             document.getElementById("used").textContent += letter + " ";
         }
