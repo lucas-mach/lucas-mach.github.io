@@ -10,7 +10,7 @@ let row = [
 let words = ["APPLE","BEACH","CLOUD","DAISY","EAGER","FROST","GRACE","HUMOR","IGLOO","JOKER",
 "KINDS","LEMON","MAGIC","NIGHT","OCEAN","PEACH","QUICK","RAVEN","SILKY","THUMB",
 "USHER","VIVID","WITTY","XENON","YOUTH","ZEBRA","ALARM","BLISS","CHAIR","DRIFT",
-"EMBER","FLAME","GRIN","HUMID","IVORY","JAZZY","KICKS","LOFTY","MANGO","NOISE",
+"EMBER","FLAME","GRIND","HUMID","IVORY","JAZZY","KICKS","LOFTY","MANGO","NOISE",
 "OPERA","PEACH","QUEST","RUMOR","SWEET","THUDS","UPEND","VIDEO","WIDOW","XEROX",
 "YOGIC","ZESTY","AVOID","BLOOM","CRAFT","DAZZY","EXALT","FRESH","GRUMP","HELLO",
 "IDYLL","JIFFY","KNEAD","LURCH","MIXER","NIXIE","OVERT","PLUMB","QUEST","RAVEL",
@@ -19,11 +19,28 @@ let words = ["APPLE","BEACH","CLOUD","DAISY","EAGER","FROST","GRACE","HUMOR","IG
 "NOBLE","OZONE","PLUMB","QUEST","RAVEL","SLANT","THUMP","UNDER","VIVID","WOOLY",
 "XENON","YOGIC","SHARP"]
 window.addEventListener("keydown",checkKey)
-word = pickWord();
 
+let word = pickWord();
 function pickWord(){
     index = Math.floor(Math.random() * 99);
     return words[index];
+}
+
+
+let mapYourWord = new Map();
+let mapCorrectWord = new Map();
+mapCorrectWord = addToMap(word,mapCorrectWord);
+
+function addToMap(_word, _map){
+    for(let i = 0; i < _word.length; i++){
+        if(_map.has(_word[i])){
+            _map.set(_word[i],_map.get(_word[i]) + 1);
+        }
+        else{
+            _map.set(_word[i], 1)
+        }
+    }
+    return _map;
 }
 
 function checkKey(event){
@@ -46,22 +63,42 @@ function checkKey(event){
         }
     }
     if(event.key == "Enter" && isFull()){
+        let yourWord = row[0].letter + row[1].letter + row[2].letter + row[3].letter + row[4].letter;
+        
+        
         for(let i = 0; i < row.length; i++){
+            if(mapYourWord.has(row[i].letter)){
+                mapYourWord.set(row[i].letter,mapYourWord.get(row[i].letter) + 1);
+            }
+            else{
+                mapYourWord.set(row[i].letter, 1);
+            }
             if(row[i].letter==word[i]){
                 row[i].color = "lightgreen";
             }
-            else if(word.includes(row[i].letter)){
+            else if(word.includes(row[i].letter)&& mapYourWord.get(row[i].letter) <= mapCorrectWord.get(row[i].letter) ){
                 row[i].color = "yellow";
             }
             else{
                 row[i].color = "red";
             }
         }
+        
         addColors();
-        console.log(row)
+        if (checkWin()){
+            document.getElementById("result").textContent = "Congradulations you won!"
+            document.getElementById("myButton").style.display = "block";
+            document.getElementById("myButton").onclick = function(){
+                window.location.reload();
+            }
+        }
         currRow += 1;
         if(currRow > 6){
-            document.getElementById("result").textContent = word;iuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+            document.getElementById("result").textContent = word;
+            document.getElementById("myButton").style.display = "block";
+            document.getElementById("myButton").onclick = function(){
+                window.location.reload();
+            }
         }
         row = [
             {letter : "", color: "lightgrey"},
@@ -70,6 +107,8 @@ function checkKey(event){
             {letter : "", color: "lightgrey"},
             {letter : "", color: "lightgrey"},
         ]
+        
+
 
     }
 
@@ -87,29 +126,39 @@ function checkKey(event){
                 document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "lightgreen";
             }
             else if(row[i].color == "yellow"){
-                if(countLetterInputed(row[i].letter) == 1 && countLetterReal(row[i].letter) == 1){
-            
-                    document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "yellow";
-                }
-                else if(countLetterReal(row[i].letter) == 1 && countLetterInputed(row[i].letter) > 1) {
-                    if(hasGreen(row[i].letter)){
-                        document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "rgb(255, 51, 0)";
-                        row[i].color = "rgb(255, 51, 0)";
-                    }
-                    else{
-                        document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "yellow";
-                    }
+                if(hasGreen(row[i].letter)){
+                    document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "rgb(255, 51, 0)";
+                    row[i].color = "rgb(255, 51, 0)";
                 }
                 else{
-                    
-                    if(hasGreen(row[i].letter)){
-                        document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "rgb(255, 51, 0)";
-                        row[i].color = "rgb(255, 51, 0)";
-                    }
-                    else{
-                        document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "yellow";
-                    }
+                    document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "yellow";
                 }
+            //     document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "yellow";
+            // }
+            // else if(row[i].color == "yellow"){
+            //     if(countLetterInputed(row[i].letter) == 1 && countLetterReal(row[i].letter) == 1){
+            
+            //         document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "yellow";
+            //     }
+            //     else if(countLetterReal(row[i].letter) == 1 && countLetterInputed(row[i].letter) > 1) {
+            //         if(hasGreen(row[i].letter)){
+            //             document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "rgb(255, 51, 0)";
+            //             row[i].color = "rgb(255, 51, 0)";
+            //         }
+            //         else{
+            //             document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "yellow";
+            //         }
+            //     }
+            //     else{
+                    
+            //         if(hasGreen(row[i].letter)){
+            //             document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "rgb(255, 51, 0)";
+            //             row[i].color = "rgb(255, 51, 0)";
+            //         }
+            //         else{
+            //             document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "yellow";
+            //         }
+            //     }
              }
             else{
                 document.getElementById("row"+String(currRow)+"b"+String(i)).style.backgroundColor = "red";
@@ -156,6 +205,15 @@ function maxYellow(_letter){
             }
         }
         return count;
+}
+
+function checkWin(){
+    for(let i = 0; i < row.length;i++){
+        if(row[i].color != "lightgreen"){
+            return false;
+        }
+    }
+    return true;
 }
 
 
