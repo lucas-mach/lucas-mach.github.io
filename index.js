@@ -25,7 +25,7 @@ function pickWord(){
     index = Math.floor(Math.random() * 99);
     return words[index];
 }
-
+let used = new Set();
 
 let mapYourWord = new Map();
 let mapCorrectWord = new Map();
@@ -67,6 +67,7 @@ function checkKey(event){
         
         
         for(let i = 0; i < row.length; i++){
+            used.add(String(row[i].letter));
             if(mapYourWord.has(row[i].letter)){
                 mapYourWord.set(row[i].letter,mapYourWord.get(row[i].letter) + 1);
             }
@@ -85,6 +86,10 @@ function checkKey(event){
         }
         
         addColors();
+        mapYourWord.clear();
+        for(let letter of used){
+            document.getElementById("used").textContent += letter + " ";
+        }
         if (checkWin()){
             document.getElementById("result").textContent = "Congradulations you won!"
             document.getElementById("myButton").style.display = "block";
