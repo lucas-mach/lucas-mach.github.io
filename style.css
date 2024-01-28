@@ -1,13 +1,17 @@
 #wordle{
     text-align: center;
     text-shadow: 0px 0px 2px rgb(129, 147, 24);
-    font-family: 'Aclonica', Times, serif;
+    font-family: consolas, Times, serif;
     font-size:80px;
     color :royalblue;
     margin-bottom: 5px;
-    
+    border-style:solid;
+    border-color: black;
     margin:auto;
-  
+    width: 350px;
+    border-radius: 12px;
+    font-weight: 200px;
+  background-color: white;
 }
 .keyboard {
   position: fixed;
@@ -83,7 +87,7 @@
   height: 50px;
   text-align: center;
   border-radius: 15px;
-  margin-top: 150px;
+  margin-top: 85px;
   margin-left:20%;
   font-weight: bold;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -93,7 +97,7 @@
 }
 
 #result{
-  margin-bottom: 50%;
+  margin-bottom: 20%;
     text-align: center;
     font-size: 50px;
     width: 400px;
@@ -124,7 +128,7 @@ body{
     width: 60px;
     border: 3px solid;
     margin-top: 10px;
-    margin-left: 32%;
+    margin-left: 22%;
     text-align: center;
     border-radius: 15px;
     font-size: 45px;
