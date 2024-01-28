@@ -20,7 +20,7 @@ let words = ["APPLE","BEACH","CLOUD","DAISY","EAGER","FROST","GRACE","HUMOR","IG
 "XENON","YOGIC","SHARP"]
 window.addEventListener("keydown",checkKey)
 word = pickWord();
-word = "LUCAS"
+
 function pickWord(){
     index = Math.floor(Math.random() * 99);
     return words[index];
